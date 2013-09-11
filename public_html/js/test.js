@@ -36,9 +36,10 @@ requirejs.config({
 });
 
 // Load the main app module to start the app
-requirejs(["unittest/TestCell", "QUnit"], function(TestCell, QUnit) {
-    TestCell.test1();
-    TestCell.test2();
+requirejs(["unittest/CellTest", "unittest/TableTest", "QUnit"], function(CellTest, TableTest, QUnit) {
+    CellTest.test1();
+    CellTest.test2();
+    TableTest.test();
 
     // start QUnit.
     QUnit.load();
