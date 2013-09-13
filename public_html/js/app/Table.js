@@ -13,6 +13,24 @@ define(["app/Cell", "app/Coordinate", "app/NativeTable"], function(Cell, Coordin
                 }
             }
         };
+
+        this.setTable = function(pTable) {
+            if (pTable.constructor === Array) {
+                for (x in pTable) {
+                    for (y in pTable[x]) {
+                        this.getCell(new Coordinate(x, y)).setLive(pTable[x][y]);
+                    }
+                }
+            } else {
+                throw new function InvalidArgumentException() {
+                };
+            }
+        };
+        
+        this.getTable = function(){
+            return this._table;
+        };
+
         this.getNeighbourCells = function(pCell) {
             if (pCell.constructor === Cell) {
                 var coord = pCell.getCoord();
@@ -32,11 +50,18 @@ define(["app/Cell", "app/Coordinate", "app/NativeTable"], function(Cell, Coordin
                 return neighbourCells;
             }
         };
+
         this._addNotNullCell = function(neighbourCells, x, y) {
-            var cell = this.getCell(new Coordinate(x, y));
-            if (cell !== null) {
+            if (this._checkXCoord(x) && this._checkYCoord(y)) {
+                var cell = this.getCell(new Coordinate(x, y));
                 neighbourCells.push(cell);
             }
+        };
+        this._checkXCoord = function(x) {
+            return 0 < x && x < this.getXSize();
+        };
+        this._checkYCoord = function(y) {
+            return 0 < y && y < this.getYSize();
         };
     };
 });

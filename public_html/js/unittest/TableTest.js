@@ -53,7 +53,7 @@ define(["app/Cell", "app/Table", "app/Coordinate", "QUnit"], function(Cell, Tabl
                 }
 
             });
-            
+
             test("Table.getCell()", function() {
                 var table = new Table(sizeX, sizeY);
 
@@ -71,7 +71,7 @@ define(["app/Cell", "app/Table", "app/Coordinate", "QUnit"], function(Cell, Tabl
                 equal(cell1.isLive(), false, "check setted value");
             });
             test("Table.getNeighbourCells()", function() {
-                var table = new Table(sizeX, sizeY);
+                var table = new Table(5, 5);
 
                 table.setTable([
                     [false, false, false, false, false],
@@ -82,20 +82,61 @@ define(["app/Cell", "app/Table", "app/Coordinate", "QUnit"], function(Cell, Tabl
                 ]);
                 var middleX = 2;
                 var middleY = 1;
-                var cellMiddle = table.getCell(new Coordinate(middleX,middleY));
+                var cellMiddle = table.getCell(new Coordinate(middleX, middleY));
                 var nCells = table.getNeighbourCells(cellMiddle);
-                equal(nCells.length,8, "Number of neighbours = 8. Coord:("+middleX+","+middleY+") ");
-                for (var c in nCells){
+                equal(nCells.length, 8, "Number of neighbours = 8. Coord:(" + middleX + "," + middleY + ") ");
+                for (var c in nCells) {
                     var x = nCells[c].getCoord().getX();
                     var y = nCells[c].getCoord().getY();
-                    var diffX = Math.abs(x-middleX);
-                    var diffY = Math.abs(y-middleY);
+                    var diffX = Math.abs(x - middleX);
+                    var diffY = Math.abs(y - middleY);
                     if (diffX < 2 && diffY < 2) {
-                        ok(true, "Coordinates ("+x+","+y+") are neighbour-alike");
+                        ok(true, "Coordinates (" + x + "," + y + ") are neighbour-alike");
                     }
                 }
             });
         },
+        testGetTable: function() {
+            test("Table.getTable()", function() {
+                var table = new Table(3, 3);
+
+                table.setTable([
+                    [true, false, true],
+                    [false, true, false],
+                    [true, false, true],
+                ]);
+                var cell = table.getCell(new Coordinate(1, 1));
+                ok(this.tableCompare(table, [
+                    [true, false, true],
+                    [false, false, false],
+                    [true, false, true],
+                ]), "One pixel changed");
+                cell.setLive(true);
+                ok(this.tableCompare(table, [
+                    [true, false, true],
+                    [false, true, false],
+                    [true, false, true],
+                ]), "One pixel changed back");
+
+            
+            });
+        },
+        tableCompare: function(table1, table2) {
+            if (table1.length !== table2.length) {
+                return false;
+            }
+            for (x in table1) {
+                if (table1[x].length !== table2[x].length) {
+                    return false;
+                }
+                for (y in table2) {
+                    if (table1[x][y] !== table2[x][y]) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     };
     return TableTest;
 });

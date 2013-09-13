@@ -11,12 +11,6 @@ define([], function() {
             }
         }
 
-        this.setTable = function(pTable) {
-            this._table = pTable;
-            xSize = this._table.length;
-            ySize = this._table[0].length;
-        };
-
         this._setCell = function(x, y, value) {
             if ((x > -1 && y > -1) && (x < xSize) && (y < ySize)) {
                 if (value === null || value === true) {

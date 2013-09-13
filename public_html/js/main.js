@@ -24,19 +24,8 @@ requirejs.config({
 });
 
 // Load the main app module to start the app
-requirejs(["app/Start", "app/CanvasTable", "app/Cell", "app/Coordinate"], function(Start, CanvasTable, Cell, Coordinate) {
-    var canvas = document.getElementById('canvas');
-    var table = new CanvasTable(canvas);
-    console.log(table);
-
-    var cell = table.getCell(new Coordinate(10,10));
-    cell.setLive(true);
-    var cell = table.getCell(new Coordinate(11,11));
-    cell.setLive(true);
-    var cell = table.getCell(new Coordinate(12,12));
-    cell.setLive(true);
-    var cell = table.getCell(new Coordinate(13,13));
-    cell.setLive(true);
-    
+requirejs(["app/Start"], function(Start) {
+	start = new Start();
+	start.go();
 });
 

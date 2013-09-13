@@ -9,8 +9,6 @@ define(["app/Table"], function(Table) {
         var width = canvas.getAttribute("width")*1;
         var height = canvas.getAttribute("height")*1;
         this.__proto__ = new Table(width, height);
-
-        this.setTable = null;
         
         this._setCell = function(x, y, value) {
             this.__proto__._setCell(x, y, value);

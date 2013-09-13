@@ -42,6 +42,7 @@ requirejs(["unittest/CoordinateTest", "unittest/CellTest", "unittest/TableTest",
     CellTest.test1();
     CellTest.test2();
     TableTest.test();
+    TableTest.testGetTable();
 
     // start QUnit.
     QUnit.load();
