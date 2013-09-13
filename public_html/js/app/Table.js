@@ -1,73 +1,42 @@
-define(["app/Cell","app/Coordinate"], function(Cell,Coordinate) {
-	return function Table(x, y) {
-		var xSize = x;
-		var ySize = y;
+define(["app/Cell", "app/Coordinate", "app/NativeTable"], function(Cell, Coordinate, NativeTable) {
+    return function Table(x, y) {
+        this.__proto__ = new NativeTable(x, y);
 
-		this._table = new Array();
-		for (var x = 0; x<xSize; x++){
-			this._table[x] = new Array();
-			for (var y = 0; y<ySize; y++){
-				this._table[x][y] = false;
-			}
-		}
+        this.getCell = function(coord) {
+            if (coord.constructor === Coordinate) {
+                if (coord.getX() < this.getXSize() && coord.getY() < this.getYSize()) {
+                    var ret = new Cell(this, coord);
+                    return ret;
+                } else {
+                    throw new function InvalidCoordinateException() {
+                    };
+                }
+            }
+        };
+        this.getNeighbourCells = function(pCell) {
+            if (pCell.constructor === Cell) {
+                var coord = pCell.getCoord();
+                var neighbourCells = Array();
+                var x = coord.getX();
+                var y = coord.getY();
 
-		this.getXSize = function() {
-			return xSize;
-		};
-		this.getYSize = function() {
-			return ySize;
-		};
-		
-		this.setTable = function(pTable){
-			this._table = pTable;
-			xSize = this._table.length;
-			ySize = this._table[0].length;
-		};
+                this._addNotNullCell(neighbourCells, x - 1, y - 1);
+                this._addNotNullCell(neighbourCells, x - 1, y);
+                this._addNotNullCell(neighbourCells, x - 1, y + 1);
+                this._addNotNullCell(neighbourCells, x, y - 1);
+                this._addNotNullCell(neighbourCells, x, y + 1);
+                this._addNotNullCell(neighbourCells, x + 1, y - 1);
+                this._addNotNullCell(neighbourCells, x + 1, y);
+                this._addNotNullCell(neighbourCells, x + 1, y + 1);
 
-		this.getCell = function(coord) {
-			if (coord.constructor === Coordinate) {
-				if (coord.x < xSize && coord.y < ySize) {
-					return new Cell(this, coord);
-				} else {
-					return null;
-					// Throw an exception;
-				}
-			}
-		};
-		this._getCell = function(x, y) {
-			if (x>-1 && y>-1) {
-				var coord = new Coordinate(x, y);
-				return this.getCell(coord);
-			} else {
-				return null;
-			}
-		};
-		this.getNeighbourCells = function(pCell) {
-			if (pCell.constructor === Cell) {
-				var coord = pCell.getCoord();
-				var neighbourCells = Array();
-
-				this._addNotNullCell(neighbourCells, this._getCell(coord.x - 1, coord.y - 1));
-				this._addNotNullCell(neighbourCells, this._getCell(coord.x - 1, coord.y));
-				this._addNotNullCell(neighbourCells, this._getCell(coord.x - 1, coord.y + 1));
-				this._addNotNullCell(neighbourCells, this._getCell(coord.x + 1, coord.y - 1));
-				this._addNotNullCell(neighbourCells, this._getCell(coord.x + 1, coord.y));
-				this._addNotNullCell(neighbourCells, this._getCell(coord.x + 1, coord.y + 1));
-				this._addNotNullCell(neighbourCells, this._getCell(coord.x, coord.y - 1));
-				this._addNotNullCell(neighbourCells, this._getCell(coord.x, coord.y + 1));
-				
-				return neighbourCells;
-			}
-		};
-		this._addNotNullCell = function(neighbourCells, cell) {
-			if (cell != null) {
-				neighbourCells.push(cell);
-			}
-		};
-		this.setCell = function(coord, cell) {
-			if (coord.constructor === Coordinate && cell.constructor === Cell) {
-				this._ [coord.x][coord.y] = cell.isLive();
-			}
-		};
-	};
+                return neighbourCells;
+            }
+        };
+        this._addNotNullCell = function(neighbourCells, x, y) {
+            var cell = this.getCell(new Coordinate(x, y));
+            if (cell !== null) {
+                neighbourCells.push(cell);
+            }
+        };
+    };
 });

@@ -1,7 +1,7 @@
 define([], function(){
 	return function Coordinate(x, y) {
 		
-		if (x == null && y == null) {
+		if (x == null || y == null) {
 			throw "Illegal Argument Exception";
 		}
 		var _x = 0;
