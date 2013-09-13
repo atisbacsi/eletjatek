@@ -36,7 +36,9 @@ requirejs.config({
 });
 
 // Load the main app module to start the app
-requirejs(["unittest/CellTest", "unittest/TableTest", "QUnit"], function(CellTest, TableTest, QUnit) {
+requirejs(["unittest/CoordinateTest", "unittest/CellTest", "unittest/TableTest", "QUnit"], function(CoordinateTest, CellTest, TableTest, QUnit) {
+	CoordinateTest.test();
+	
     CellTest.test1();
     CellTest.test2();
     TableTest.test();

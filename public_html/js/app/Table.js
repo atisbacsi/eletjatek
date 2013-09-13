@@ -3,7 +3,6 @@ define(["app/Cell","app/Coordinate"], function(Cell,Coordinate) {
 		var xSize = x;
 		var ySize = y;
 
-		
 		this._table = new Array();
 		for (var x = 0; x<xSize; x++){
 			this._table[x] = new Array();
@@ -11,7 +10,6 @@ define(["app/Cell","app/Coordinate"], function(Cell,Coordinate) {
 				this._table[x][y] = false;
 			}
 		}
-		
 
 		this.getXSize = function() {
 			return xSize;
@@ -39,7 +37,7 @@ define(["app/Cell","app/Coordinate"], function(Cell,Coordinate) {
 		this._getCell = function(x, y) {
 			if (x>-1 && y>-1) {
 				var coord = new Coordinate(x, y);
-				return this.getCell(coord);				
+				return this.getCell(coord);
 			} else {
 				return null;
 			}

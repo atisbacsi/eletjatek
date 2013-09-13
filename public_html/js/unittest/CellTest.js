@@ -8,8 +8,8 @@ define(["app/Cell", "app/Table", "app/Coordinate", "QUnit"], function(Cell, Tabl
             var cell1 = new Cell(table, new Coordinate(xCoord, yCoord));
             test("Basic functions", function() {
                 equal(cell1.isLive(), false, "Default not live");
-                equal(cell1.getCoord().x, xCoord, "x coord check");
-                equal(cell1.getCoord().y, yCoord, "y coord check");
+                equal(cell1.getCoord().getX(), xCoord, "x coord check");
+                equal(cell1.getCoord().getY(), yCoord, "y coord check");
             });
         },
         test2: function() {
