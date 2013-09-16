@@ -58,10 +58,10 @@ define(["app/Cell", "app/Coordinate", "app/NativeTable"], function(Cell, Coordin
             }
         };
         this._checkXCoord = function(x) {
-            return 0 < x && x < this.getXSize();
+            return 0 <= x && x < this.getXSize();
         };
         this._checkYCoord = function(y) {
-            return 0 < y && y < this.getYSize();
+            return 0 <= y && y < this.getYSize();
         };
     };
 });

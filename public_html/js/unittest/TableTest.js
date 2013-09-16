@@ -98,6 +98,9 @@ define(["app/Cell", "app/Table", "app/Coordinate", "QUnit"], function(Cell, Tabl
         },
         testGetTable: function() {
             test("Table.getTable()", function() {
+                
+                var xCoordToChange = 1;
+                var yCoordToChange = 1;
                 var table = new Table(3, 3);
 
                 table.setTable([
@@ -105,14 +108,15 @@ define(["app/Cell", "app/Table", "app/Coordinate", "QUnit"], function(Cell, Tabl
                     [false, true, false],
                     [true, false, true],
                 ]);
-                var cell = table.getCell(new Coordinate(1, 1));
-                ok(this.tableCompare(table, [
+                var cell = table.getCell(new Coordinate(xCoordToChange, yCoordToChange));
+                cell.setLive(false);                
+                ok(TableTest.tableCompare(table.getTable(), [
                     [true, false, true],
                     [false, false, false],
                     [true, false, true],
                 ]), "One pixel changed");
                 cell.setLive(true);
-                ok(this.tableCompare(table, [
+                ok(TableTest.tableCompare(table.getTable(), [
                     [true, false, true],
                     [false, true, false],
                     [true, false, true],
@@ -125,11 +129,11 @@ define(["app/Cell", "app/Table", "app/Coordinate", "QUnit"], function(Cell, Tabl
             if (table1.length !== table2.length) {
                 return false;
             }
-            for (x in table1) {
+            for (var x in table1) {
                 if (table1[x].length !== table2[x].length) {
                     return false;
                 }
-                for (y in table2) {
+                for (var y in table2) {
                     if (table1[x][y] !== table2[x][y]) {
                         return false;
                     }
