@@ -36,8 +36,7 @@ define(["app/Table", "app/Coordinate", "app/Cell", "app/TableCellIterator"], fun
 	    		var decision = this.decide(actualCell);
 	    		tableNew.getCell(actualCell.getCoord()).setLive(decision);
 	    	}
-	    	table = tableNew;
-	    	return table;
+                table.copyTable(tableNew);
 	    };
 	}; 
 });

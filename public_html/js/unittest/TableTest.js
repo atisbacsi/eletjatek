@@ -98,7 +98,7 @@ define(["app/Cell", "app/Table", "app/Coordinate", "QUnit"], function(Cell, Tabl
         },
         testGetTable: function() {
             test("Table.getTable()", function() {
-                
+
                 var xCoordToChange = 1;
                 var yCoordToChange = 1;
                 var table = new Table(3, 3);
@@ -109,7 +109,7 @@ define(["app/Cell", "app/Table", "app/Coordinate", "QUnit"], function(Cell, Tabl
                     [true, false, true],
                 ]);
                 var cell = table.getCell(new Coordinate(xCoordToChange, yCoordToChange));
-                cell.setLive(false);                
+                cell.setLive(false);
                 ok(TableTest.tableCompare(table.getTable(), [
                     [true, false, true],
                     [false, false, false],
@@ -122,7 +122,35 @@ define(["app/Cell", "app/Table", "app/Coordinate", "QUnit"], function(Cell, Tabl
                     [true, false, true],
                 ]), "One pixel changed back");
 
-            
+
+            });
+        },
+        testCopyTable: function() {
+            test("Table.copyTable()", function() {
+
+                var table1 = new Table(3, 3);
+                var table2 = new Table(3, 3);
+
+                var clearTableArray = [
+                    [false, false, false],
+                    [false, false, false],
+                    [false, false, false],
+                ];
+
+                ok(TableTest.tableCompare(table2.getTable(), clearTableArray), "Original target table test");
+
+                var tableArray = [
+                    [true, false, true],
+                    [false, true, false],
+                    [true, false, true],
+                ];
+
+                table1.setTable(tableArray);
+                table2.copyTable(table1);
+                ok(TableTest.tableCompare(table1.getTable(), tableArray), "Original source table test");
+                ok(TableTest.tableCompare(table2.getTable(), tableArray), "Copyed table test");
+
+
             });
         },
         tableCompare: function(table1, table2) {

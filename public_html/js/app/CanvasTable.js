@@ -13,9 +13,9 @@ define(["app/Table"], function(Table) {
         this._setCell = function(x, y, value) {
             this.__proto__._setCell(x, y, value);
             if (value) {
-                ctx.fillRect(x, y, 1, 1);
+                ctx.fillRect(y, x, 1, 1);
             } else {
-                ctx.clearRect(x, y, 1, 1);
+                ctx.clearRect(y, x, 1, 1);
             }
         };
     };

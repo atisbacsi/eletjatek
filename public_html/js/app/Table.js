@@ -14,6 +14,17 @@ define(["app/Cell", "app/Coordinate", "app/NativeTable"], function(Cell, Coordin
             }
         };
 
+        this.copyTable = function(pTable) {
+            var maxX = (pTable.getXSize() < this.getXSize()) ? this.getXSize() : pTable.getXSize();
+            var maxY = (pTable.getYSize() < this.getYSize()) ? this.getYSize() : pTable.getYSize();
+
+            for (var x = 0; x < maxX; x++) {
+                for (var y = 0; y < maxY; y++) {
+                    this.getCell(new Coordinate(x,y)).setLive(pTable.getCell(new Coordinate(x,y)).isLive());
+                }
+            }
+        };
+
         this.setTable = function(pTable) {
             if (pTable.constructor === Array) {
                 for (x in pTable) {
@@ -26,8 +37,8 @@ define(["app/Cell", "app/Coordinate", "app/NativeTable"], function(Cell, Coordin
                 };
             }
         };
-        
-        this.getTable = function(){
+
+        this.getTable = function() {
             return this._table;
         };
 
