@@ -21,7 +21,7 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <p>Hello Live Game</p>
+        <p>Live Game</p>
 
         <script data-main="js/main" src="js/libs/require.js"></script>
 
@@ -32,9 +32,14 @@
 //             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
 //             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
-        <canvas id="canvas" width="250" height="250">
-            Your browser does not support Canvas.
-        </canvas>
 
+        <div style="border: #000 1px solid; width:752px;">
+            <canvas id="canvas" width="750" height="300" style="">
+                Your browser does not support Canvas.
+            </canvas>
+        </div>
+        <input type="range" id="speed" value="500" min="10" max="2000" step="20">
+        <output id="speedDisplay">500</output>
+        <input type="button" id="startButton" value="Start">
     </body>
 </html>

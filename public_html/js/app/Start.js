@@ -1,9 +1,23 @@
-define(["app/CanvasTable", "app/Live"], function(CanvasTable, Live) {
+define(["app/CanvasTable", "app/Live", "app/CanvasClickAbility", "app/Ticker"], function(CanvasTable, Live, CanvasClickAbility, Ticker) {
     return function Start() {
         var canvas = document.getElementById('canvas');
-        var table = new CanvasTable(canvas);
+        var start = document.getElementById('startButton');
+        var speedslider = document.getElementById('speed');
+
+        var table = new CanvasTable(canvas, 10);
         var live = new Live(table);
-        this.go = function() {
+        var clickFace = new CanvasClickAbility(table);
+
+        var running = false;
+
+        var runner = function() {
+            live.getTableNextYear();
+        };
+
+        var ticker = new Ticker(runner);
+
+
+        this.init = function() {
             table.setTable(
                     [
                         [false, false, false, false, false, false],
@@ -16,21 +30,17 @@ define(["app/CanvasTable", "app/Live"], function(CanvasTable, Live) {
                     ]
                     );
 
-//            live.getTableNextYear();
-//            live.getTableNextYear();
-//            live.getTableNextYear();
-//            live.getTableNextYear();
-            var i = 0;
-            var sec = 1;
-
-            var waitXSec = function () {
-                i++;
-                if (i < 20) {
-                    live.getTableNextYear();
-                    console.log("a");
-                }
+            speedslider.onchange = function() {
+                ticker.setSpeed(speedslider.value);
             };
-            setInterval(waitXSec, 1000 * sec);
+            start.onclick = function() {
+                if (!running) {
+                    ticker.start();
+                } else {
+                    ticker.stop();
+                }
+                running = !running;
+            };
         };
     };
 });
