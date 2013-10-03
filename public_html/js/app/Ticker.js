@@ -2,7 +2,7 @@ define([], function() {
 
     return function Ticker(pFunc) {
         var func = pFunc;
-        var speed = 500;
+        var speed = 50;
         var countup = 0;
         var step = 20;
         var runID;

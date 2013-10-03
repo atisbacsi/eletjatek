@@ -21,7 +21,6 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <p>Live Game</p>
 
         <script data-main="js/main" src="js/libs/require.js"></script>
 
@@ -33,13 +32,34 @@
 //             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
 
-        <div style="border: #000 1px solid; width:752px;">
-            <canvas id="canvas" width="750" height="300" style="">
-                Your browser does not support Canvas.
-            </canvas>
+        <div class="outer-frame">
+            <div class="app-frame">
+                <p>Live Game</p>
+                <div style="border: #000 1px solid; width:752px;">
+                    <canvas id="canvas" width="750" height="300" style="">
+                        Your browser does not support Canvas.
+                    </canvas>
+                </div>
+                <div class="steering-wheel">
+                    <div class="pictures">
+                        Predefined pictures:
+                        <select id="pictureSelect">
+                            <option id="1">Empty</option>>
+                        </select>
+                    </div>
+                    <div class="start">
+                        <input type="button" id="startButton" value="Start">
+                    </div>
+                    <div class="start">
+                        <input type="button" id="print" value="Print">
+                    </div>
+                    <div class="speed">
+                        Speed
+                        <input type="range" id="speed" value="50" min="10" max="500" step="10">
+                        <output id="speedDisplay">50</output>
+                    </div>
+                </div>
+            </div>
         </div>
-        <input type="range" id="speed" value="500" min="10" max="2000" step="20">
-        <output id="speedDisplay">500</output>
-        <input type="button" id="startButton" value="Start">
     </body>
 </html>

@@ -26,6 +26,6 @@ requirejs.config({
 // Load the main app module to start the app
 requirejs(["app/Start"], function(Start) {
 	start = new Start();
-	start.init();
+//	start.init();
 });
 

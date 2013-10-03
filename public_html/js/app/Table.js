@@ -33,7 +33,7 @@ define(["app/Cell", "app/Coordinate", "app/NativeTable"], function(Cell, Coordin
 
             for (var x = 0; x < maxX; x++) {
                 for (var y = 0; y < maxY; y++) {
-                    this.getCell(new Coordinate(x,y)).setLive(pTable.getCell(new Coordinate(x,y)).isLive());
+                    this.getCell(new Coordinate(x, y)).setLive(pTable.getCell(new Coordinate(x, y)).isLive());
                 }
             }
         };

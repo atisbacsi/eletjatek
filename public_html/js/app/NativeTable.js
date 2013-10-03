@@ -31,13 +31,19 @@ define([], function() {
                 throw new function InvalidCellException() {
                 };
             }
-        }
+        };
 
         this.getXSize = function() {
             return xSize;
         };
         this.getYSize = function() {
             return ySize;
+        };
+
+        this.logContent = function() {
+            if (console !== null) {
+                console.log(JSON.stringify(this._table));
+            }
         };
     };
 });

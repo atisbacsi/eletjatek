@@ -92,7 +92,20 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-
+.app-frame {
+    margin: 0 auto;
+    display: table;
+}
+.steering-wheel div{
+    display: inline;
+}
+.steering-wheel {
+    width: 100%;
+}
+.steering-wheel .speed {
+    width: 100%;
+    text-align: right;
+}
 
 
 
