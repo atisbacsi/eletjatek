@@ -1,10 +1,10 @@
 define([], function() {
 
-    return function Ticker(pFunc) {
+    return function Ticker(pFunc, startSpeed) {
         var func = pFunc;
-        var speed = 50;
+        var speed = startSpeed;
         var countup = 0;
-        var step = 20;
+        var step = 10;
         var runID;
         
         this.setSpeed = function(pSpeed){

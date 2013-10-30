@@ -4,6 +4,7 @@ define(["app/CanvasTable", "app/Live", "app/CanvasClickAbility", "app/Ticker", "
         var canvas;
         var start;
         var speedslider;
+        var speeddisplay;
         var table;
         var filler;
         var fillerSelector;
@@ -28,11 +29,12 @@ define(["app/CanvasTable", "app/Live", "app/CanvasClickAbility", "app/Ticker", "
             start = document.getElementById('startButton');
             printBtn = document.getElementById('print');
             speedslider = document.getElementById('speed');
+            speeddisplay = document.getElementById('speedDisplay');
             dropDown = document.getElementById('pictureSelect');
         };
 
         var setupTicker = function() {
-            ticker = new Ticker(run);
+            ticker = new Ticker(run, speedslider.value);
             start.onclick = startClick;
             speedslider.onchange = speedChange;
         };
@@ -43,17 +45,6 @@ define(["app/CanvasTable", "app/Live", "app/CanvasClickAbility", "app/Ticker", "
             filler = new Filler(table);
             fillerSelector = new FillerSelector(dropDown, filler);
             
-//            table.setTable(
-//                    [
-//                        [false, false, false, false, false, false],
-//                        [false, false, false, true, false, false],
-//                        [false, false, false, true, false, false],
-//                        [false, false, false, true, false, false],
-//                        [false, false, false, true, false, false],
-//                        [false, false, false, true, false, false],
-//                        [false, false, false, false, false, false],
-//                    ]
-//                    );
             printBtn.onclick = function() {
                 table.logContent();
             };
@@ -78,6 +69,7 @@ define(["app/CanvasTable", "app/Live", "app/CanvasClickAbility", "app/Ticker", "
 
         var speedChange = function() {
             ticker.setSpeed(speedslider.value);
+            speeddisplay.value = speedslider.value;
         };
 
         constructor();
